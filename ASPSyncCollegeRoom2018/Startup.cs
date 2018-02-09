@@ -73,6 +73,7 @@ namespace ASPSyncCollegeRoom2018
             app.UseMvc((routebuilder =>
             {
                 routebuilder.MapODataServiceRoute("odata", "odata", builder.GetEdmModel());
+                routebuilder.EnableDependencyInjection(); //hack? https://github.com/OData/WebApi/issues/1175
             }));
 
             app.UseMvc(routes =>

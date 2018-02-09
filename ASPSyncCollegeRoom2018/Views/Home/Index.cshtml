@@ -8,8 +8,8 @@
 
 @*@section ControlsSection {*@
 <div>
-    /*ej-Tag Helper code to render DataManager*/
-    <e-datamanager id="myData" url="http://services.odata.org/V4/Northwind/Northwind.svc/Orders/" adaptor="ODataV4Adaptor" cross-domain="true"></e-datamanager>
+    @*/*ej-Tag Helper code to render DataManager*/*@
+    <e-datamanager id="myData" table="" url="cal.db" adaptor="ODataV4Adaptor" cross-domain="true"></e-datamanager>
 
 
     <ej-schedule id="Schedule1" width="100%" height="525px" current-date="@ViewBag.CurrentDate" orientation="Horizontal" show-all-day-row="true" show-weekend="false" start-hour="8" end-hour="18">
