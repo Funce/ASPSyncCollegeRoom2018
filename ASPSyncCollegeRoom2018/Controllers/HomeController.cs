@@ -77,8 +77,8 @@ namespace ASPSyncCollegeRoom2018.Controllers
         public List<ScheduleData> GetData()
         {
 
-            List<ScheduleData> datas = _dbContext.ScheduleData.Take(500).ToList();
-            return datas;
+            List<ScheduleData> data = _dbContext.ScheduleData.Take(500).ToList();
+            return data;
         }
 
         public List<ScheduleData> Batch([FromBody] EditParams param)
