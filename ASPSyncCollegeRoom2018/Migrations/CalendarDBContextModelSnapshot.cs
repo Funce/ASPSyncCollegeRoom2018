@@ -17,7 +17,7 @@ namespace ASPSyncCollegeRoom2018.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "2.0.0-rtm-26452");
+                .HasAnnotation("ProductVersion", "2.0.1-rtm-125");
 
             modelBuilder.Entity("ASPSyncCollegeRoom2018.Models.Appointment", b =>
                 {
@@ -33,24 +33,24 @@ namespace ASPSyncCollegeRoom2018.Migrations
 
             modelBuilder.Entity("ASPSyncCollegeRoom2018.Models.ScheduleData", b =>
                 {
-                    b.Property<int>("ProgramId")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("Comments");
+                    b.Property<bool>("AllDay");
 
-                    b.Property<bool>("IsAllDay");
+                    b.Property<string>("Description");
 
-                    b.Property<bool>("IsRecurrence");
+                    b.Property<DateTime>("EndTime");
 
-                    b.Property<DateTime>("ProgramEndTime");
-
-                    b.Property<string>("ProgramName");
-
-                    b.Property<DateTime>("ProgramStartTime");
+                    b.Property<bool>("Recurrence");
 
                     b.Property<string>("RecurrenceRule");
 
-                    b.HasKey("ProgramId");
+                    b.Property<DateTime>("StartTime");
+
+                    b.Property<string>("Subject");
+
+                    b.HasKey("Id");
 
                     b.ToTable("ScheduleData");
                 });

@@ -10,35 +10,26 @@ namespace ASPSyncCollegeRoom2018.Models
     public class ScheduleData
     {
         [Key]
-        public int ProgramId { get; set; }
-        public string ProgramName { get; set; }
-        public string Comments { get; set; }
-        public DateTime ProgramStartTime { get; set; }
-        public DateTime ProgramEndTime { get; set; }
-        public bool IsAllDay { get; set; }
-        public bool IsRecurrence { get; set; }
+        public int Id { get; set; }
+        public string Subject { get; set; }
+        public bool AllDay { get; set; }
+        public bool Recurrence { get; set; }
+        public DateTime StartTime { get; set; }
+        public DateTime EndTime { get; set; }
+        public string Description { get; set; }
         public string RecurrenceRule { get; set; }
 
+        //public int ProgramId { get; set; }
+        //public string ProgramName { get; set; }
+        //public string Comments { get; set; }
+        //public DateTime ProgramStartTime { get; set; }
+        //public DateTime ProgramEndTime { get; set; }
+        //public bool IsAllDay { get; set; }
+        //public bool IsRecurrence { get; set; }
+        //public string RecurrenceRule { get; set; }
+
         // Method that passes the Scheduler appointment data
-        public List<ScheduleData> getSchedulerData()
-        {
-            List<ScheduleData> data = new List<ScheduleData> {
-                new ScheduleData {
-                    ProgramName = "Turtle Walk",
-                    Comments = "Night out with turtles",
-                    ProgramStartTime = new DateTime(2016, 6, 2, 3, 0, 0),
-                    ProgramEndTime = new DateTime(2016, 6, 2, 4, 0, 0),
-                    IsAllDay = true
-                },
-                new ScheduleData {
-                    ProgramName = "Winter Sleepers",
-                    Comments = "Long sleep during winter season",
-                    ProgramStartTime = new DateTime(2016, 6, 3, 1, 0, 0),
-                    ProgramEndTime = new DateTime(2016, 6, 3, 2, 0, 0)
-                }
-            };
-            return data;
-        }
+
 
 
     }

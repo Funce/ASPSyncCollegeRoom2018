@@ -12,8 +12,8 @@ namespace ASPSyncCollegeRoom2018.Migrations
                 name: "Appointment",
                 columns: table => new
                 {
-                    Text = table.Column<string>(type: "TEXT", nullable: false),
-                    Id = table.Column<string>(type: "TEXT", nullable: true)
+                    Text = table.Column<string>(nullable: false),
+                    Id = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -24,19 +24,19 @@ namespace ASPSyncCollegeRoom2018.Migrations
                 name: "ScheduleData",
                 columns: table => new
                 {
-                    ProgramId = table.Column<int>(type: "INTEGER", nullable: false)
+                    Id = table.Column<int>(nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    Comments = table.Column<string>(type: "TEXT", nullable: true),
-                    IsAllDay = table.Column<bool>(type: "INTEGER", nullable: false),
-                    IsRecurrence = table.Column<bool>(type: "INTEGER", nullable: false),
-                    ProgramEndTime = table.Column<DateTime>(type: "TEXT", nullable: false),
-                    ProgramName = table.Column<string>(type: "TEXT", nullable: true),
-                    ProgramStartTime = table.Column<DateTime>(type: "TEXT", nullable: false),
-                    RecurrenceRule = table.Column<string>(type: "TEXT", nullable: true)
+                    AllDay = table.Column<bool>(nullable: false),
+                    Description = table.Column<string>(nullable: true),
+                    EndTime = table.Column<DateTime>(nullable: false),
+                    Recurrence = table.Column<bool>(nullable: false),
+                    RecurrenceRule = table.Column<string>(nullable: true),
+                    StartTime = table.Column<DateTime>(nullable: false),
+                    Subject = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ScheduleData", x => x.ProgramId);
+                    table.PrimaryKey("PK_ScheduleData", x => x.Id);
                 });
         }
 

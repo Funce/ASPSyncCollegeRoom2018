@@ -10,8 +10,11 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using ASPSyncCollegeRoom2018.Data;
 using Microsoft.AspNetCore.Mvc;
 using ASPSyncCollegeRoom2018.Models;
+using Microsoft.EntityFrameworkCore;
+using Syncfusion.JavaScript;
 using Syncfusion.JavaScript.Models;
 using Color = System.Drawing.Color;
 
@@ -19,11 +22,17 @@ namespace ASPSyncCollegeRoom2018.Controllers
 {
     public class HomeController : Controller
     {
+
         //https://help.syncfusion.com/aspnet-core/schedule/getting-started
 
         //CRUD https://help.syncfusion.com/aspnet-core/datamanager/getting-started
 
+        public CalendarDBContext _dbContext { get; }
 
+        public HomeController(CalendarDBContext DBContext)
+        {
+            _dbContext = DBContext;
+        }
         // GET: /<controller>/
         public IActionResult Index()
         {
@@ -54,16 +63,99 @@ namespace ASPSyncCollegeRoom2018.Controllers
 
             }
 
-           ;
 
+            ViewBag.CalDBpath = new DataSource();
             ViewBag.Grouping = new List<String>() { "Rooms", "Owners" };
             ViewBag.RoomData = Rooms;
             ViewBag.OwnerData = Owners;
-            ViewBag.appointments = new ScheduleData().getSchedulerData();
+            //ViewBag.appointments = new ScheduleData().getSchedulerData();
             DateTime now = DateTime.Now;
             ViewBag.CurrentDate = now.Date;
             return View();
         }
+
+        public List<ScheduleData> GetData()
+        {
+
+            List<ScheduleData> datas = _dbContext.ScheduleData.Take(500).ToList();
+            return datas;
+        }
+
+        public List<ScheduleData> Batch([FromBody] EditParams param)
+        {
+            if (param.action == "insert" || (param.action == "batch" && (param.added.Count > 0))) // this block of code will execute while inserting the appointments
+            {
+                ScheduleData appoint = new ScheduleData();
+                object result;
+                if (param.action == "insert")
+                {
+                    var value = param.value;
+                    foreach (var fieldName in value.GetType().GetProperties())
+                    {
+                        var newName = fieldName.ToString().Split(null);
+                        if (newName[1] == "Id") result = (_dbContext.ScheduleData.ToList().Count > 0 ? _dbContext.ScheduleData.ToList().Max(p => p.Id) : 1) + 1;
+                        else if (newName[1] == "StartTime" || newName[1] == "EndTime") result = Convert.ToDateTime(fieldName.GetValue(value));
+                        else result = fieldName.GetValue(value);
+                        fieldName.SetValue(appoint, result);
+                    }
+                    _dbContext.ScheduleData.Add(appoint);
+                }
+                else
+                {
+                    foreach (var item in param.added.Select((x, i) => new { Value = x, Index = i }))
+                    {
+                        var value = item.Value;
+                        foreach (var fieldName in value.GetType().GetProperties())
+                        {
+                            var newName = fieldName.ToString().Split(null);
+                            if (newName[1] == "Id") result = (_dbContext.ScheduleData.ToList().Count > 0 ? _dbContext.ScheduleData.ToList().Max(p => p.Id) : 1) + 1 + item.Index;
+                            else if (newName[1] == "StartTime" || newName[1] == "EndTime") result = Convert.ToDateTime(fieldName.GetValue(value));
+                            else result = fieldName.GetValue(value);
+                            fieldName.SetValue(appoint, result);
+                        }
+                        _dbContext.ScheduleData.Add(appoint);
+                    }
+                }
+                _dbContext.SaveChanges();
+            }
+            if ((param.action == "remove") || (param.action == "batch" && (param.deleted.Count > 0))) // this block of code will execute while removing the appointment
+            {
+                if (param.action == "remove")
+                {
+                    ScheduleData app = _dbContext.ScheduleData.Where(c => c.Id == Convert.ToInt32(param.key)).FirstOrDefault();
+                    if (app != null) _dbContext.ScheduleData.Remove(app);
+                }
+                else
+                {
+                    foreach (var a in param.deleted)
+                    {
+                        var app = _dbContext.ScheduleData.ToList().Where(c => c.Id == Convert.ToInt32(a.Id)).FirstOrDefault();
+                        if (app != null) _dbContext.ScheduleData.Remove(app);
+                    }
+                }
+                _dbContext.SaveChanges();
+            }
+            if (param.action == "update" || (param.action == "batch" && (param.changed.Count > 0))) // this block of code will execute while updating the appointment
+            {
+                var value = param.action == "update" ? param.value : param.changed[0];
+                var filterData = _dbContext.ScheduleData.Where(c => c.Id == Convert.ToInt32(value.Id));
+                if (filterData.Count() > 0)
+                {
+                    ScheduleData appoint = _dbContext.ScheduleData.Single(A => A.Id == Convert.ToInt32(value.Id));
+                    appoint.StartTime = Convert.ToDateTime(value.StartTime);
+                    appoint.EndTime = Convert.ToDateTime(value.EndTime);
+                    appoint.Subject = value.Subject;
+                    appoint.Recurrence = value.Recurrence;
+                    appoint.AllDay = value.AllDay;
+                    appoint.RecurrenceRule = value.RecurrenceRule;
+                }
+                _dbContext.SaveChanges();
+            }
+            List<ScheduleData> datas = _dbContext.ScheduleData.Take(500).ToList();
+            return datas;
+        }
+
+
 
         public IActionResult About()
         {
@@ -78,6 +170,7 @@ namespace ASPSyncCollegeRoom2018.Controllers
 
             return View();
         }
+
 
         public IActionResult Error()
         {
