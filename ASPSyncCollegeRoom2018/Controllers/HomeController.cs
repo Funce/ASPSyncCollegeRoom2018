@@ -68,7 +68,7 @@ namespace ASPSyncCollegeRoom2018.Controllers
             ViewBag.Grouping = new List<String>() { "Rooms", "Owners" };
             ViewBag.RoomData = Rooms;
             ViewBag.OwnerData = Owners;
-            //ViewBag.appointments = new ScheduleData().getSchedulerData();
+            // ViewBag.appointments = new ScheduleData().getSchedulerData();
             DateTime now = DateTime.Now;
             ViewBag.CurrentDate = now.Date;
             return View();
