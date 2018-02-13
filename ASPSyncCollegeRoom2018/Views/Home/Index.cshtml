@@ -12,29 +12,31 @@
 
         <e-group resources="@ViewBag.Grouping"></e-group>
         <e-resources>
-            <e-resource field="RoomId" title="Room" name="Rooms" allow-multiple=false>
-                <e-resource-settings datasource="@ViewBag.RoomData" text="Text" id="Id" group-id="GroupId" color="Color"></e-resource-settings>
-            </e-resource>
-
             <e-resource field="OwnerId" title="Owner" name="Owners" allow-multiple=true>
-                <e-resource-settings datasource="@ViewBag.OwnerData" text="Text" id="Id" group-id="GroupId" color="Color"></e-resource-settings>
+                <e-resource-settings datasource="@ViewBag.Owners" text="Text" id="Id" group-id="GroupId" color="Color">  </e-resource-settings>
             </e-resource>
         </e-resources>
 
-        <e-appointment-settings datasource="@ViewBag.GetData" id="Id" subject='"Subject"' start-time='"StartTime"' end-time='"EndTime"' all-day='"AllDay"' recurrence='"Recurrence"' recurrence-rule='"RecurrenceRule"'>
+        <e-appointment-settings datasource="@ViewBag.GetData" id="Id" subject='"subject"' start-time='"startTime"' end-time='"endTime"' all-day='"AllDay"' recurrence='"Recurrence"' recurrence-rule='"RecurrenceRule"' description='"Description"'>
 
             <e-datamanager url="Home/GetData" crud-url="Home/Batch" adaptor="UrlAdaptor"></e-datamanager>
         </e-appointment-settings>
 
+
+
     </ej-schedule>
 </div>
 
-@*<script type="text/javascript">
-        $(function () {
-            $("#sampleProperties").ejPropertiesPanel();
-        });
+@*<e-group resources="@ViewBag.Grouping"></e-group>
+    <e-resources>
+        <e-resource field="RoomId" title="Room" name="Rooms" allow-multiple=false>
+            <e-resource-settings datasource="@ViewBag.RoomData" text="Text" id="Id" group-id="GroupId" color="Color"></e-resource-settings>
+        </e-resource>
 
-    </script>*@
+        <e-resource field="OwnerId" title="Owner" name="Owners" allow-multiple=true>
+            <e-resource-settings datasource="@ViewBag.OwnerData" text="Text" id="Id" group-id="GroupId" color="Color"></e-resource-settings>
+        </e-resource>
+    </e-resources>*@
 
 
 

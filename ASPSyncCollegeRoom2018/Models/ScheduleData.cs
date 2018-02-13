@@ -18,15 +18,10 @@ namespace ASPSyncCollegeRoom2018.Models
         public DateTime EndTime { get; set; }
         public string Description { get; set; }
         public string RecurrenceRule { get; set; }
+        public string RoomId { get; set; }
+        public string OwnerId { get; set; }
 
-        //public int ProgramId { get; set; }
-        //public string ProgramName { get; set; }
-        //public string Comments { get; set; }
-        //public DateTime ProgramStartTime { get; set; }
-        //public DateTime ProgramEndTime { get; set; }
-        //public bool IsAllDay { get; set; }
-        //public bool IsRecurrence { get; set; }
-        //public string RecurrenceRule { get; set; }
+
 
         // Method that passes the Scheduler appointment data
 
