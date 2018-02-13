@@ -68,16 +68,21 @@ namespace ASPSyncCollegeRoom2018.Controllers
             ViewBag.Grouping = new List<String>() { "Rooms", "Owners" };
             ViewBag.RoomData = Rooms;
             ViewBag.OwnerData = Owners;
-            // ViewBag.appointments = new ScheduleData().getSchedulerData();
+            ViewBag.appointments = _dbContext.ScheduleData.ToList();
             DateTime now = DateTime.Now;
             ViewBag.CurrentDate = now.Date;
+
+            List<ScheduleData> data = _dbContext.ScheduleData.ToList();
+            ViewBag.GetData = data;
+
             return View();
         }
 
-        public List<ScheduleData> GetData()
+        public IEnumerable<ScheduleData> GetData()
         {
+            var data = _dbContext.ScheduleData.ToList();
 
-            List<ScheduleData> data = _dbContext.ScheduleData.Take(500).ToList();
+            ViewBag.GetData = data;
             return data;
         }
 

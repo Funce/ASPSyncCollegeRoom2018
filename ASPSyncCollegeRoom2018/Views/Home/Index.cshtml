@@ -20,7 +20,8 @@
                 <e-resource-settings datasource="@ViewBag.OwnerData" text="Text" id="Id" group-id="GroupId" color="Color"></e-resource-settings>
             </e-resource>
         </e-resources>
-        <e-appointment-settings apply-time-offset="false" id="Id" subject='"Subject"' start-time='"StartTime"' end-time='"EndTime"' all-day='"AllDay"' recurrence='"Recurrence"' recurrence-rule='"RecurrenceRule"'>
+
+        <e-appointment-settings datasource="@ViewBag.GetData" id="Id" subject='"Subject"' start-time='"StartTime"' end-time='"EndTime"' all-day='"AllDay"' recurrence='"Recurrence"' recurrence-rule='"RecurrenceRule"'>
 
             <e-datamanager url="Home/GetData" crud-url="Home/Batch" adaptor="UrlAdaptor"></e-datamanager>
         </e-appointment-settings>
