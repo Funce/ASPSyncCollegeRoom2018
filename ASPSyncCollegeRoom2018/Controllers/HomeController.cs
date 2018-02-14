@@ -36,47 +36,38 @@ namespace ASPSyncCollegeRoom2018.Controllers
         // GET: /<controller>/
         public IActionResult Index()
         {
-            //List<ResourceFields> Rooms = new List<ResourceFields>();
-            //Rooms.Add(new ResourceFields { Text = "ROOM 1", Id = "1", Color = "#cb6bb2" });
-            //Rooms.Add(new ResourceFields { Text = "ROOM 2", Id = "2", Color = Color.AntiqueWhite.ToString() });
-            //Rooms.Add(new ResourceFields { Text = "ROOM 3", Id = "3", Color = Color.Beige.ToString() });
-            //Rooms.Add(new ResourceFields { Text = "ROOM 4", Id = "4", Color = "#56ca85" });
-            //Rooms.Add(new ResourceFields { Text = "ROOM 5", Id = "5", Color = "#cb6bb2" });
-            //Rooms.Add(new ResourceFields { Text = "ROOM 6", Id = "6", Color = "#56ca85" });
-            //Rooms.Add(new ResourceFields { Text = "ROOM 7", Id = "7", Color = "#cb6bb2" });
-            //Rooms.Add(new ResourceFields { Text = "ROOM 8", Id = "8", Color = "#56ca85" });
+            List<ResourceFields> Rooms = new List<ResourceFields>();
+            Rooms.Add(new ResourceFields { Text = "ROOM 1", Id = "1", Color = "#cb6bb2" });
+            Rooms.Add(new ResourceFields { Text = "ROOM 2", Id = "2", Color = Color.AntiqueWhite.ToString() });
+            Rooms.Add(new ResourceFields { Text = "ROOM 3", Id = "3", Color = Color.Beige.ToString() });
+            Rooms.Add(new ResourceFields { Text = "ROOM 4", Id = "4", Color = "#56ca85" });
+            Rooms.Add(new ResourceFields { Text = "ROOM 5", Id = "5", Color = "#cb6bb2" });
+            Rooms.Add(new ResourceFields { Text = "ROOM 6", Id = "6", Color = "#56ca85" });
+            Rooms.Add(new ResourceFields { Text = "ROOM 7", Id = "7", Color = "#cb6bb2" });
+            Rooms.Add(new ResourceFields { Text = "ROOM 8", Id = "8", Color = "#56ca85" });
 
-            //List<ResourceFields> Owners = new List<ResourceFields>();
-
-            ////https://help.syncfusion.com/aspnet-core/schedule/resources
-            //for (int i = 1; i < Rooms.Count + 1; i++)
-            //{
-            //    string RoomCount = i.ToString();
-
-
-            //    Owners.Add(new ResourceFields { Text = "Ultimate 1", Id = "2", GroupId = RoomCount, Color = "#f8a398" });
-            //    Owners.Add(new ResourceFields { Text = "Ultimate 2", Id = "3", GroupId = RoomCount, Color = "#7499e1" });
-            //    Owners.Add(new ResourceFields { Text = "Ultimate 3", Id = "5", GroupId = RoomCount, Color = "#f8a398" });
-            //    Owners.Add(new ResourceFields { Text = "Ultimate 4", Id = "6", GroupId = RoomCount, Color = "#7499e1" });
-            //    Owners.Add(new ResourceFields { Text = "Counselling 1", Id = "1", GroupId = RoomCount, Color = "#ffaa00" });
-            //    Owners.Add(new ResourceFields { Text = "Counselling 2", Id = "4", GroupId = RoomCount, Color = "#ffaa00" });
-
-            //}
-            //new
             List<ResourceFields> Owners = new List<ResourceFields>();
-            Owners.Add(new ResourceFields { Text = "Room 1", Id = "1", GroupId = "1", Color = "#ffaa00" });
-            Owners.Add(new ResourceFields { Text = "Room 2", Id = "3", GroupId = "1", Color = "#f8a398" });
-            Owners.Add(new ResourceFields { Text = "Room 3", Id = "5", GroupId = "1", Color = "#7499e1" });
+            List<ScheduleFields> aaa = new List<ScheduleFields>();
 
-            ViewBag.Owners = Owners;
-            ViewBag.Grouping = new List<String>() { "Owners" };
-            //end new
+            //https://help.syncfusion.com/aspnet-core/schedule/resources
+            for (int i = 1; i < Rooms.Count + 1; i++)
+            {
+                string RoomCount = i.ToString();
 
+
+                Owners.Add(new ResourceFields { Text = "Ultimate 1", Id = "2", GroupId = RoomCount, Color = "#f8a398" });
+                Owners.Add(new ResourceFields { Text = "Ultimate 2", Id = "3", GroupId = RoomCount, Color = "#7499e1" });
+                Owners.Add(new ResourceFields { Text = "Ultimate 3", Id = "5", GroupId = RoomCount, Color = "#f8a398" });
+                Owners.Add(new ResourceFields { Text = "Ultimate 4", Id = "6", GroupId = RoomCount, Color = "#7499e1" });
+                Owners.Add(new ResourceFields { Text = "Counselling 1", Id = "1", GroupId = RoomCount, Color = "#ffaa00" });
+                Owners.Add(new ResourceFields { Text = "Counselling 2", Id = "4", GroupId = RoomCount, Color = "#ffaa00" });
+
+            }
 
             ViewBag.CalDBpath = new DataSource();
-            //ViewBag.Grouping = new List<String>() { "Rooms", "Owners" };
-            //ViewBag.RoomData = Rooms;
-            //ViewBag.OwnerData = Owners;
+            ViewBag.Grouping = new List<String>() { "Rooms", "Owners" };
+            ViewBag.RoomData = Rooms;
+            ViewBag.OwnerData = Owners;
             ViewBag.appointments = _dbContext.ScheduleData.ToList();
             DateTime now = DateTime.Now;
             ViewBag.CurrentDate = now.Date;
