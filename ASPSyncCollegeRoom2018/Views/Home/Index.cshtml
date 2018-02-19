@@ -9,7 +9,6 @@
 <div>
     <ej-schedule id="Schedule1" width="100%" height="525px" current-date="@ViewBag.CurrentDate" orientation="Horizontal" show-weekend="false" start-hour="8" end-hour="18">
 
-
         <e-group resources="@ViewBag.Grouping"></e-group>
 
         <e-resources>
@@ -22,13 +21,14 @@
             </e-resource>
         </e-resources>
 
+
+
         <e-appointment-settings id="Id" subject='"subject"' start-time='"startTime"' end-time='"endTime"' all-day='"AllDay"' recurrence='"Recurrence"' recurrence-rule='"RecurrenceRule"' description='"Description"' resource-fields='"RoomId,OwnerId"'>
 
             <e-datamanager url="Home/GetData" crud-url="Home/Batch" adaptor="UrlAdaptor"></e-datamanager>
         </e-appointment-settings>
     </ej-schedule>
 </div>
-
 
 
 

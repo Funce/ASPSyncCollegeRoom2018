@@ -47,7 +47,7 @@ namespace ASPSyncCollegeRoom2018.Controllers
             Rooms.Add(new ResourceFields { Text = "ROOM 8", Id = "8", Color = "#56ca85" });
 
             List<ResourceFields> Owners = new List<ResourceFields>();
-            List<ScheduleFields> aaa = new List<ScheduleFields>();
+
 
             //https://help.syncfusion.com/aspnet-core/schedule/resources
             for (int i = 1; i < Rooms.Count + 1; i++)
@@ -64,14 +64,14 @@ namespace ASPSyncCollegeRoom2018.Controllers
 
             }
 
-            ViewBag.CalDBpath = new DataSource();
+            //  ViewBag.CalDBpath = new DataSource();
             ViewBag.Grouping = new List<String>() { "Rooms", "Owners" };
             ViewBag.RoomData = Rooms;
             ViewBag.OwnerData = Owners;
-            // ViewBag.appointments = _dbContext.ScheduleData.ToList();
+
             DateTime now = DateTime.Now;
             ViewBag.CurrentDate = now.Date;
-            GetData();
+            // GetData();
             return View();
         }
         //return all saved appointmemts to calendar
@@ -79,7 +79,7 @@ namespace ASPSyncCollegeRoom2018.Controllers
         {
             List<ScheduleData> data = _dbContext.ScheduleData.Take(500).ToList();
 
-            ViewBag.GetData = data;
+            ViewBag.GetData = data; //not used
             return data;
         }
 
