@@ -68,19 +68,16 @@ namespace ASPSyncCollegeRoom2018.Controllers
             ViewBag.Grouping = new List<String>() { "Rooms", "Owners" };
             ViewBag.RoomData = Rooms;
             ViewBag.OwnerData = Owners;
-            ViewBag.appointments = _dbContext.ScheduleData.ToList();
+            // ViewBag.appointments = _dbContext.ScheduleData.ToList();
             DateTime now = DateTime.Now;
             ViewBag.CurrentDate = now.Date;
-
-            List<ScheduleData> data = _dbContext.ScheduleData.ToList();
-            ViewBag.GetData = data;
-
+            GetData();
             return View();
         }
-
+        //return all saved appointmemts to calendar
         public IEnumerable<ScheduleData> GetData()
         {
-            var data = _dbContext.ScheduleData.ToList();
+            List<ScheduleData> data = _dbContext.ScheduleData.Take(500).ToList();
 
             ViewBag.GetData = data;
             return data;
@@ -158,8 +155,9 @@ namespace ASPSyncCollegeRoom2018.Controllers
                 }
                 _dbContext.SaveChanges();
             }
-            List<ScheduleData> datas = _dbContext.ScheduleData.Take(500).ToList();
-            return datas;
+
+            List<ScheduleData> data = GetData().ToList();//  _dbContext.ScheduleData.Take(500).ToList();
+            return data;
         }
 
 
