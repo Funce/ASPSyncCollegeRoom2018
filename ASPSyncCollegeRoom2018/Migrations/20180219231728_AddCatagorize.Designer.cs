@@ -11,9 +11,10 @@ using System;
 namespace ASPSyncCollegeRoom2018.Migrations
 {
     [DbContext(typeof(CalendarDBContext))]
-    partial class CalendarDBContextModelSnapshot : ModelSnapshot
+    [Migration("20180219231728_AddCatagorize")]
+    partial class AddCatagorize
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

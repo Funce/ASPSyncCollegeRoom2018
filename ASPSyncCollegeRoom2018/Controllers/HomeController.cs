@@ -33,6 +33,8 @@ namespace ASPSyncCollegeRoom2018.Controllers
         {
             _dbContext = DBContext;
         }
+
+
         // GET: /<controller>/
         public IActionResult Index()
         {
@@ -64,14 +66,32 @@ namespace ASPSyncCollegeRoom2018.Controllers
 
             }
 
+            List<Categorize> categorizeValue = new List<Categorize>();
+            categorizeValue.Add(new Categorize { text = "Ultimate 1", id = 1, color = "#43b496", fontColor = "#ffffff" });
+            categorizeValue.Add(new Categorize { text = "Ultimate 2", id = 2, color = "#7f993e", fontColor = "#ffffff" });
+            categorizeValue.Add(new Categorize { text = "Ultimate 3", id = 3, color = "#cc8638", fontColor = "#ffffff" });
+            categorizeValue.Add(new Categorize { text = "Ultimate 4", id = 4, color = "#ab54a0", fontColor = "#ffffff" });
+            categorizeValue.Add(new Categorize { text = "Counselling 1", id = 5, color = "#dd654e", fontColor = "#ffffff" });
+            categorizeValue.Add(new Categorize { text = "Yellow Category", id = 6, color = "#d0af2b", fontColor = "#ffffff" });
+
+            ViewBag.categorizeData = categorizeValue;
+
+
             //  ViewBag.CalDBpath = new DataSource();
-            ViewBag.Grouping = new List<String>() { "Rooms", "Owners" };
+            ViewBag.Grouping = new List<String>() { "Rooms" };
             ViewBag.RoomData = Rooms;
             ViewBag.OwnerData = Owners;
 
             DateTime now = DateTime.Now;
             ViewBag.CurrentDate = now.Date;
-            // GetData();
+
+
+
+
+
+
+
+
             return View();
         }
         //return all saved appointmemts to calendar

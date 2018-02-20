@@ -20,6 +20,7 @@ namespace ASPSyncCollegeRoom2018.Models
         public string RecurrenceRule { get; set; }
         public string RoomId { get; set; }
         public string OwnerId { get; set; }
+        public string Categorize { get; set; }
 
 
 
