@@ -77,8 +77,8 @@ namespace ASPSyncCollegeRoom2018.Controllers
             ViewBag.categorizeData = categorizeValue;
 
 
-            //  ViewBag.CalDBpath = new DataSource();
-            ViewBag.Grouping = new List<String>() { "Rooms" };
+
+            ViewBag.Grouping = new List<String>() { "Rooms", "Owners" };
             ViewBag.RoomData = Rooms;
             ViewBag.OwnerData = Owners;
 
